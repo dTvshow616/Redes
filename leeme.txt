@@ -1,0 +1,25 @@
+Autores: Martín Darío Marmolejo Díaz y Ana Olsson Rodríguez (1311)
+Nº | Realizado | Parcialmente-Realizado | No-Realizado | Requisito 
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+1. |    [x]    |          [ ]           |     [ ]      | Contar paquetes de una traza (independientemente del número de paquetes)
+  -> Explicación: El número de paquetes contados aumenta por cada iteración de procesa_paquete() y si se parase un programa con npkts=N antes de tiempo, al final de su
+  ejecución se vería que el número de paquetes capturados es menor a N (añadiendo un print(num_paquete) en procesa_paquete() también se puede ver cómo aumenta)
+2. |    [x]    |          [ ]           |     [ ]      | Contar paquetes de la interfaz de red
+  -> Explicación: Al igual que en el anterior apartado, el conteo de paquetes aumenta con cada iteración de procesa_paquete()
+3. |    [x]    |          [ ]           |     [ ]      | Uso de un único "flujo" para traza e interfaz
+  -> Explicación: Una vez abierto el archivo pcap o interfaz y guardarlos en handle, ambos emplean procesa_paquete() para cada paquete a través de un mismo pcap_loop()
+4. |    [x]    |          [ ]           |     [ ]      | Almacenar correctamente el tráfico capturado en vivo una traza
+  -> Explicación: 
+5. |    [x]    |          [ ]           |     [ ]      | Separar correctamente el trafico capturado en dos trazas
+  -> Explicación: 
+6. |    [x]    |          [ ]           |     [ ]      | Gestionar correctamente el numero de paquetes a leer
+  -> Explicación: 
+7. |    [x]    |          [ ]           |     [ ]      | Calcular tiempo entre último y primer paquete
+  -> Explicación: 
+8. |    [x]    |          [ ]           |     [ ]      | Imprimir los N primeros bytes de un paquete (pruebe para N>32) y validarlo con Wireshark (captura de pantalla)
+  -> Explicación: 
+
+Adicionalmente, en contraste_captura_paquetes.jpeg podemos observar el tráfico capturado directamente con Wireshark (en la ventana izquierda) comparado con el resultado
+de ejecución de nuestro programa (ventana derecha), pudiendo apreciar que es el mismo, excepto por los últimos paquetes de Wireshark ya que el programa finalizó antes.
+Si alguno de los paquetes hubiese cumplido el requisito de que sus bytes 12 y 13 corresponden con el valor 0x0A8 y 0x0B6, respectivamente, se encontrarían en la captura
+NOIP y por tanto no aparecerían en esta.

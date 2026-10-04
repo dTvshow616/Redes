@@ -6,12 +6,13 @@
     V0.5
 '''
 import collections
-import ctypes,sys
-from ctypes.util import find_library
-#from types import NoneType
-from typing import Callable, Union
+import ctypes
 import inspect
+from collections.abc import Callable
 from functools import wraps
+
+#from types import NoneType
+
 NoneType = type(None)
 def get_top_type(T):
     try:
@@ -34,14 +35,14 @@ def check_types(funct):
             if get_top_type(expected_type) is collections.abc.Callable:
                 continue
             if not isinstance(bounded_args[argname], expected_type):
-                raise TypeError(f"Argument '{str(argname)}' of function '{funct.__qualname__}' must be of type '{str(expected_type.__qualname__)}' but it was '{type(bounded_args[argname]).__qualname__}'")
+                raise TypeError(f"Argument '{argname!s}' of function '{funct.__qualname__}' must be of type '{expected_type.__qualname__!s}' but it was '{type(bounded_args[argname]).__qualname__}'")
         result = funct(*args, **kwargs)
         if "return" in funct.__annotations__:
             expected_type = funct.__annotations__["return"]
             if get_top_type(expected_type) is collections.abc.Callable:
                 pass
             elif not isinstance(result, expected_type):
-                raise TypeError(f"Return of function '{funct.__qualname__}' must be of type '{str(expected_type.__qualname__)}' but it was '{type(result).__qualname__}'")
+                raise TypeError(f"Return of function '{funct.__qualname__}' must be of type '{expected_type.__qualname__!s}' but it was '{type(result).__qualname__}'")
         return result
     return wrapped
 
@@ -61,10 +62,10 @@ def mycallback(us, h, data):
 
 pcap = ctypes.cdll.LoadLibrary("libpcap.so")
 
-class _pcap_t():
+class _pcap_t:
     pass
 
-class _pcap_dump_t():
+class _pcap_dump_t:
     pass
 
 class pcap_t(ctypes.c_void_p):
@@ -74,12 +75,12 @@ class pcap_dumper_t(ctypes.c_void_p, _pcap_dump_t):
     pass
 
 
-class timeval():
+class timeval:
     def __init__(self,tv_sec,tv_usec):
         self.tv_sec = tv_sec
         self.tv_usec = tv_usec
 
-class pcap_pkthdr():
+class pcap_pkthdr:
     def __init__(self):
         self.len=0
         self.caplen=0
